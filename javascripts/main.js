@@ -21,7 +21,9 @@ require(['jquery', 'search'], function($, search) {
 		search.searchFilms()
 			.then(function(filmData) {
 				console.log('filmData = ', filmData);
-				$('#output').html(filmData.Title); //
+				$('#outputTitle').html(filmData.Title); 
+				$('#outputActors').html(filmData.Actors);
+				$('#outputYear').html(filmData.Year);  
 			});
 		
 	});
