@@ -7,6 +7,8 @@ define(function(require) {
   $('#registerButton').click(function(e) {
     e.preventDefault();
     var form = {
+        firstName: $('#firstName').val(),
+        lastName: $('#lastName').val(),
         email: $('#email').val(),
         password: $('#password').val()
         };
