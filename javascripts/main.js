@@ -29,7 +29,7 @@ require(['jquery', 'search', 'lodash', 'hbs!../templates/titleSearch'], function
 			}).done();
 				
         
-	});
+	});//
 			
 });
 
