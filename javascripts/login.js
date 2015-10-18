@@ -3,8 +3,10 @@ define(function(require) {
 
   var loginRef = new Firebase("https://movie-history-project.firebaseio.com/");
 
-  $("#loginPage").click(function(e) {
+  $("#loginButton").click(function(e) {
+
     e.preventDefault();
+
     var loginForm = {
         email: $("#email").val(),
         password: $("#password").val()
@@ -12,12 +14,14 @@ define(function(require) {
 
     loginRef.authWithPassword(loginForm, function(error, authData) {
       if (error) {
+        console.log(error);
       } else {
-        window.location = "/search.html";  
+        console.log("authData", authData);
+        window.location = "/search.html";
       }
-    
+
     });
-  
+
   }); // End callback function
 
 }); // End module definition
