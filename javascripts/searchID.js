@@ -1,30 +1,30 @@
-define(require(function) {
+define(function(require) {
 
-	var $ = require('jquery');
-	var q = require('q');
+  var $ = require('jquery');
+  var q = require('q');
 
-	return {
+  return {
 
-		searchById: function(arrayOfIds) {
-			
-			var deferred = q.defer();
-			var query = $('#search').val();
-			
-			for (var i = 0; )
-			$.ajax({
-				type: 'GET',
-				url: 'http://www.omdbapi.com/?i=' + query
-			}).done(function(idData) {
+    searchById: function(arrayOfIds) {
 
-					deferred.resolve(idData);
-					console.log('Data from OMDB API = ', idData);
-				})
-				.fail(function(xhr, status, error) {
-					deferred.reject(error);
-				});	
+      var deferred = q.defer();
+      var query = $('#search').val();
 
-			return deferred.promise;
+      $.ajax({
+        type: 'GET',
+        url: 'http://www.omdbapi.com/?i=' + query
+        }).done( function(idData) {
+            deferred.resolve(idData);
+            console.log('Data from OMDB API = ', idData);
+          })
+          .fail( function(xhr, status, error) {
+            deferred.reject(error);
+          });
 
-	}; // End of return
+      return deferred.promise;
 
-}); // End of module definition 
+    }
+
+  }; // End of return
+
+}); // End of module definition
