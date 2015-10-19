@@ -12,6 +12,9 @@ define(function(require) {
         password: $("#password").val()
     };
 
+    var loginCopy = loginForm;
+    console.log("login Copy", loginCopy);
+
     loginRef.authWithPassword(loginForm, function(error, authData) {
       if (error) {
         console.log(error);

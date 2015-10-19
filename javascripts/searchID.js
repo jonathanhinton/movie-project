@@ -1,4 +1,4 @@
-define(require(function) {
+define(require(function() {
 
 	var $ = require('jquery');
 	var q = require('q');
@@ -6,25 +6,25 @@ define(require(function) {
 	return {
 
 		searchById: function(arrayOfIds) {
-			
+
 			var deferred = q.defer();
 			var query = $('#search').val();
-			
-			for (var i = 0; )
+
 			$.ajax({
 				type: 'GET',
 				url: 'http://www.omdbapi.com/?i=' + query
-			}).done(function(idData) {
-
-					deferred.resolve(idData);
-					console.log('Data from OMDB API = ', idData);
-				})
-				.fail(function(xhr, status, error) {
-					deferred.reject(error);
-				});	
+			}).done( function(idData) {
+				deferred.resolve(idData);
+				console.log('Data from OMDB API = ', idData);
+			})
+			.fail( function(xhr, status, error) {
+				deferred.reject(error);
+			});
 
 			return deferred.promise;
 
-	}; // End of return
+            }
 
-}); // End of module definition 
+      }; // End of return
+
+})); // End of module definition

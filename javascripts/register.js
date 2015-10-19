@@ -13,15 +13,12 @@ define(function(require) {
       password: $('#password').val()
     };
 
-    registerRef.createUser(form, function(error, userData) {
+    registerRef.createUser(form, function(error, authData) {
 
       if (error) {
         console.log(error);
-      }
-
-      var authdata = registerRef.getAuth();
-
-      if (authdata) {
+      } else {
+        console.log(authData);
         window.location = '/search.html';
       }
 
