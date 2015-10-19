@@ -12,7 +12,7 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'search', 'lodash', 'hbs!../templates/titleSearch'], function($, search, _, searchHbs) {
+require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register'], function($, search, getFilms, _, searchHbs, register) {
 
 
   $('#submit').click(function(e) {
@@ -30,5 +30,26 @@ require(['jquery', 'search', 'lodash', 'hbs!../templates/titleSearch'], function
 
 
   });
+
+  $(document).on('click', '.addFilm', function(e) {
+		var filmID = this.id;
+		console.log('filmID', filmID);
+		getFilms.getFilm(filmID)
+		.then(function(filmObj) {
+			console.log('filmObj', filmObj);
+		})
+
+		$.ajax({
+			url: 'https://movie-history-project.firebaseio.com/movie-history-project/users/' + regUser + '.json',
+			method: 'POST',
+			data: JSON.stringify(filmObj)
+			}).done(function(filmObj) {
+				console.log('filmObj', filmObj);
+			});			
+
+
+
+
+  })
 
 });
