@@ -5,15 +5,15 @@ requirejs.config({
     'lodash': '../lib/bower_components/lodash/lodash.min',
     'hbs': '../lib/bower_components/require-handlebars-plugin/hbs',
     'bootstrap': '../lib/bower_components/bootstrap/dist/js/bootstrap.min',
-    'q': '../lib/bower_components/q/q'
+    'q': '../lib/bower_components/q/q',
+    'firebase': '../lib/bower_components/firebase/firebase'
   },
     shim: {
       'bootstrap': ['jquery']
     }
 });
 
-require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register'], function($, search, getFilms, _, searchHbs, register) {
-
+require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register', 'login'], function($, search, getFilms, _, searchHbs, register, login) {
 
   $('#submit').click(function(e) {
     var globalFilmData;
@@ -32,24 +32,21 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
   });
 
   $(document).on('click', '.addFilm', function(e) {
-		var filmID = this.id;
-		console.log('filmID', filmID);
-		getFilms.getFilm(filmID)
-		.then(function(filmObj) {
-			console.log('filmObj', filmObj);
-		})
+	var filmID = this.id;
+	console.log('filmID', filmID);
+	getFilms.getFilm(filmID)
+	.then(function(filmObj) {
+		console.log('filmObj', filmObj);
+	});
 
-		$.ajax({
-			url: 'https://movie-history-project.firebaseio.com/movie-history-project/users/' + regUser + '.json',
-			method: 'POST',
-			data: JSON.stringify(filmObj)
-			}).done(function(filmObj) {
-				console.log('filmObj', filmObj);
-			});			
+	$.ajax({
+		url: 'https://movie-history-project.firebaseio.com/movie-history-project/users/' + regUser + '.json',
+		method: 'POST',
+		data: JSON.stringify(filmObj)
+	}).done(function(filmObj) {
+		console.log('filmObj', filmObj);
+	});
 
-
-
-
-  })
+  });
 
 });
