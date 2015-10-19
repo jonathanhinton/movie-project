@@ -13,24 +13,22 @@ requirejs.config({
 });
 
 require(['jquery', 'search', 'lodash', 'hbs!../templates/titleSearch'], function($, search, _, searchHbs) {
-	
 
-	$('#submit').click(function(e) {
-		var globalFilmData;
-		var globalIds;
 
-		e.preventDefault();
+  $('#submit').click(function(e) {
+    var globalFilmData;
+    var globalIds;
 
-		search.searchFilms()
-			.then(function(filmData) {
-				globalFilmData = filmData;
-				console.log('globalFilmData', globalFilmData);
-				$('#output').html(searchHbs(globalFilmData));
-			}).done();
-				
-        
-	});//
-			
+    e.preventDefault();
+
+    search.searchFilms()
+      .then(function(filmData) {
+        globalFilmData = filmData;
+        console.log('globalFilmData', globalFilmData);
+        $('#output').html(searchHbs(globalFilmData));
+      }).done();
+
+
+  });
+
 });
-
-
