@@ -9,8 +9,6 @@ define(function(require) {
 		
 			var deferred = q.defer();
 
-			console.log('filmID in module', filmID);
-
 			$.ajax({
 				type: 'GET',
 	      url: 'http://www.omdbapi.com/?i=' + filmID
