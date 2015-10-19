@@ -13,7 +13,10 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register', 'login'], function($, search, getFilms, _, searchHbs, register, login) {
+require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register', 'login', 'addMovie'],
+  function($, search, getFilms, _, searchHbs, register, login, addMovie) {
+
+    var ref = new Firebase("https://movie-history-project.firebaseio.com");
 
   $('#submit').click(function(e) {
     var globalFilmData;
@@ -28,7 +31,6 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('#output').html(searchHbs(globalFilmData));
       }).done();
 
-
   });
 
   $(document).on('click', '.addFilm', function(e) {
@@ -36,16 +38,19 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 	console.log('filmID', filmID);
 	getFilms.getFilm(filmID)
 	.then(function(filmObj) {
-		console.log('filmObj', filmObj);
+        console.log('filmObj', filmObj);
+        var user = ref.getAuth().uid;
+        console.log("user", user);
+        addMovie.addMovie(user, filmObj);
 	});
 
-	$.ajax({
-		url: 'https://movie-history-project.firebaseio.com/movie-history-project/users/' + regUser + '.json',
-		method: 'POST',
-		data: JSON.stringify(filmObj)
-	}).done(function(filmObj) {
-		console.log('filmObj', filmObj);
-	});
+	// $.ajax({
+	// 	url: 'https://movie-history-project.firebaseio.com/movie-history-project/users/' + regUser + '.json',
+	// 	method: 'POST',
+	// 	data: JSON.stringify(filmObj)
+	// }).done(function(filmObj) {
+	// 	console.log('filmObj', filmObj);
+	// });
 
   });
 

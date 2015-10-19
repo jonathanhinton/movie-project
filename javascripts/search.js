@@ -4,9 +4,7 @@ define(function(require) {
 	var q = require('q');
 
       var loginRef = new Firebase("https://movie-history-project.firebaseio.com/");
-
-      var ref = new Firebase("movie-history-project.firebaseio.com");
-      var userAuth = ref.getAuth();
+      var userAuth = loginRef.getAuth();
 
       if(userAuth) {
         console.log("Authenticated user with uid:", userAuth.uid);
@@ -19,10 +17,9 @@ define(function(require) {
 			var deferred = q.defer();
 			var query = $('#search').val();
 
-
 			$.ajax({
-				type: 'GET',
-				url: 'http://www.omdbapi.com/?s=' + query
+                    type: 'GET',
+                    url: 'http://www.omdbapi.com/?s=' + query
 			}).done(function(searchData) {
                     deferred.resolve(searchData);
                     console.log('Search data from OMDB API = ', searchData);
