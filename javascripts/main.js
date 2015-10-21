@@ -71,6 +71,9 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     console.log("watched button clicked");
     var filmID = this.id;
     watchedMovie.watchedMovie(user, this.id);
+    console.log(this);
+    $(this).find('.glyphicon').removeClass("glyphicon-eye-open").addClass("glyphicon-ok");
+    $(this).parent().hide().fadeIn("slow");
   });
 
 });
