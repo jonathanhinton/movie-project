@@ -15,8 +15,8 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register', 'login', 'addMovie', 'bootstrap-star-rating', 'eraseFilm'],
-  function($, search, getFilms, _, searchHbs, register, login, addMovie, starRating, eraseFilm) {
+require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register', 'login', 'addMovie', 'bootstrap-star-rating', 'eraseFilm', 'watchedMovie'],
+  function($, search, getFilms, _, searchHbs, register, login, addMovie, starRating, eraseFilm, watchedMovie) {
 
   var ref = new Firebase("https://movie-history-project.firebaseio.com");
   var user = ref.getAuth().uid;
@@ -64,6 +64,13 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     var filmID = this.id;
     eraseFilm.eraseFilm(user, filmID);
     $(this).parent().hide();
+  });
+
+  $(document).on("click", ".watched-movie", function() {
+
+    console.log("watched button clicked");
+    var filmID = this.id;
+    watchedMovie.watchedMovie(user, this.id);
   });
 
 });

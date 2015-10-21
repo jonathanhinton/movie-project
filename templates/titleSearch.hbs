@@ -7,16 +7,16 @@
 	<div>{{ Title }}</div>
 	<div>{{ Year }}</div>
 	{{!-- <div>{{ Actors }}</div> --}}
-    {{#if watched}}
-        <span class='glyphicon glyphicon-ok'></span>
-    {{else}}
-	<button class='addFilm' id={{ imdbID }}>
-		<span class='glyphicon glyphicon-plus'></span>
-	</button>
-    {{/if}}
-    <button class='watched-movie' id={{ imdbID }}>
-        <span class='glyphicon glyphicon-eye-open'></span>
-    </button>
-    <input class='stars' id={{ imdbID }} />
+  <button class='addFilm' id={{ imdbID }}>
+    <span class='glyphicon glyphicon-plus'></span>
+  </button>
+  {{#if watched}}
+    <span class='glyphicon glyphicon-ok'></span>
+  {{else}}
+  <button class='watched-movie' id={{ imdbID }}>
+      <span class='glyphicon glyphicon-eye-open'></span>
+  </button>
+  {{/if}}
+  <input class='stars' id={{ imdbID }} />
 </div>
 {{/each}}
