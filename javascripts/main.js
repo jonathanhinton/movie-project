@@ -15,7 +15,7 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'search', 'getFilms', 'addMovie', 'hbs!../templates/titleSearch','bootstrap-star-rating'], function($, search, getFilms, addMovie, searchHbs, starRating) {
+require(['jquery', 'login', 'search', 'getFilms', 'addMovie', 'hbs!../templates/titleSearch','bootstrap-star-rating'], function($, login, search, getFilms, addMovie, searchHbs, starRating) {
 
 	
 
@@ -24,7 +24,7 @@ require(['jquery', 'search', 'getFilms', 'addMovie', 'hbs!../templates/titleSear
 
   $('#submit').click(function(e) {
     var globalFilmData;
-    var globalIds;
+    var firebaseArray = [];
 
     e.preventDefault();
 
@@ -34,13 +34,18 @@ require(['jquery', 'search', 'getFilms', 'addMovie', 'hbs!../templates/titleSear
         console.log('globalFilmData', globalFilmData);
         $('#output').html(searchHbs(globalFilmData));
         $('.stars').rating();
-      }).done();
+        return search.searchFirebase(user)
+      })
+      .then(function(firebaseData) {
+        console.log('firebaseData', firebaseData);
+        firebaseArray = Object.keys(firebaseData).map(key => firebaseData[key]);
+        console.log('firebaseArray', firebaseArray);
+        var filmsToRender = firebaseArray.concat(globalFilmData.Search);
+        console.log('filmsToRender', filmsToRender);
+        $('#output').append(searchHbs({'Search': filmsToRender}));
+        $('.stars').rating();
+      });
 
-
-    search.searchFirebase(user)
-    	.then(function(firebaseData) {
-    		console.log('firebaseData', firebaseData);
-    	})
   });
 
   $(document).on('click', '.addFilm', function(e) {
@@ -54,9 +59,18 @@ require(['jquery', 'search', 'getFilms', 'addMovie', 'hbs!../templates/titleSear
 	    addMovie.addMovie(user, filmObj, value);
 		});
 
+  $(document).on('click', '.deleteFilm', function(e) {
+    getFilms.getFilm(filmID)
+    .then(function(filmObj) {
+      deleteMovies.deleteMovie(user, filmObj, value);
+    });
+      console.log('Remove button clicked');
+    // Create promise and callback to remove film from Firebase
   });
 
-// Inside this function, we want to insert a conditional statement that says 'if you rate this film, then you watched it,'' and the rating gets pushed (along with the film object) to the user's Firebase
+  });
+
+// Inside this function, we want to insert a conditional statement that says 'if you rate this film, then you watched it,' and the rating gets pushed (along with the film object) to the user's Firebase.
   
 
   $(document).on('rating.change', '.stars', function(e, value, caption) {
@@ -65,7 +79,7 @@ require(['jquery', 'search', 'getFilms', 'addMovie', 'hbs!../templates/titleSear
     console.log('filmID', filmID);
     getFilms.getFilm(filmID)
     .then(function(filmObj) {
-      addMovie.addMovie(user, filmObj, value)  
+      addMovie.addMovie(user, filmObj, value);  
     });
       // console.log('value', value);
       // console.log('filmObj.imdbID', filmObj.imdbID);
@@ -75,6 +89,7 @@ require(['jquery', 'search', 'getFilms', 'addMovie', 'hbs!../templates/titleSear
       //   } else {
       //   }
   
+
     
   });
 

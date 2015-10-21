@@ -16,7 +16,7 @@ define(function(require) {
 				url: 'http://www.omdbapi.com/?s=' + query
 			}).done(function(searchData) {
           deferred.resolve(searchData);
-          console.log('Search data from OMDB API = ', searchData);
+          // console.log('Search data from OMDB API = ', searchData);
 			}).fail(function(xhr, status, error) {
           deferred.reject(error);
           });
@@ -29,14 +29,14 @@ define(function(require) {
 
 			var deferred = q.defer();
 			var query = $('#search').val();
-			var URL = 'https://movie-history-project.firebaseio.com/profiles'
+			var URL = 'https://movie-history-project.firebaseio.com/profiles';
 
 			$.ajax({
 				type: 'GET',
 				url: 'https://movie-history-project.firebaseio.com/profiles/' + uid +'.json'
 			}).done(function(firebaseData) {
 					deferred.resolve(firebaseData);
-					console.log('Search data from Firebase = ', firebaseData);
+					// console.log('Search data from Firebase = ', firebaseData);
 			}).fail(function(xhr, status, error) {
 				deferred.reject(error);
 			});

@@ -6,7 +6,12 @@
 	{{!-- <div>{{ Actors }}</div> --}}
 	<button class='addFilm' id={{ imdbID }}>
 		<span class='glyphicon glyphicon-plus'></span>
+	</button> 
+	<button class='deleteFilm'>
+		<span class='glyphicon glyphicon-minus'></span>
 	</button>
-	<input class='stars' id={{ imdbID }} />
+		{{#if rating }}
+			<input class='stars' id={{ imdbID }} value={{ rating }} />
+		{{/if}}
 </div>
 {{/each}}

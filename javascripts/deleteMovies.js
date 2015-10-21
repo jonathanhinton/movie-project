@@ -4,19 +4,18 @@ define(["jquery"], function($) {
 
   return {
 
-    addMovie: function(uid, film, value) {
+    deleteMovie: function(uid, film, value) {
 
       var firebaseFilm = {
         Title : film.Title,
         Year : film.Year,
         Actors : film.Actors,
         watched : false,
-        imdbID: film.imdbID,
         rating : value || 0,
         Poster : "http://img.omdbapi.com/?i=" + film.imdbID + "&apikey=8513e0a1"
       };
 
-      ref.child("profiles").child(uid).child(film.imdbID).set(firebaseFilm);
+      ref.child("profiles").child(uid).child(film.imdbID).remove(firebaseFilm);
 
       console.log("new movie", firebaseFilm);
 
