@@ -16,7 +16,7 @@ define(function(require) {
       if (error) {
         console.log(error);
       } else {
-        console.log("authData", authData);
+        // console.log("authData", authData);
         window.location = "/search.html";
       }
 
