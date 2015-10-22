@@ -46,6 +46,8 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
       // console.log("user", user);
       addMovie.addMovie(user, filmObj);
   	});
+    console.log(this);
+    $(this).hide();
   });
 
   $(document).on('rating.change', '.stars', function(e, value, caption) {

@@ -12,7 +12,8 @@ define(["jquery"], function($) {
         Actors : film.Actors,
         watched : false,
         rating : value || 0,
-        Poster : "http://img.omdbapi.com/?i=" + film.imdbID + "&apikey=8513e0a1"
+        Poster : "http://img.omdbapi.com/?i=" + film.imdbID + "&apikey=8513e0a1",
+        Added : true
       };
 
       ref.child("profiles").child(uid).child(film.imdbID).set(firebaseFilm);
