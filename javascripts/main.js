@@ -15,7 +15,7 @@ requirejs.config({
     }
 });
 
-require(['jquery', 'login', 'search', 'getFilms', 'addMovie', 'hbs!../templates/titleSearch','bootstrap-star-rating'], function($, login, search, getFilms, addMovie, searchHbs, starRating) {
+require(['jquery', 'lodash', 'login', 'search', 'getFilms', 'addMovie', 'hbs!../templates/titleSearch','bootstrap-star-rating'], function($, _, login, search, getFilms, addMovie, searchHbs, starRating) {
 
 	
 
@@ -30,21 +30,37 @@ require(['jquery', 'login', 'search', 'getFilms', 'addMovie', 'hbs!../templates/
 
     search.searchFilms()
       .then(function(filmData) {
-        globalFilmData = filmData;
+        globalFilmData = filmData.Search;
         console.log('globalFilmData', globalFilmData);
-        $('#output').html(searchHbs(globalFilmData));
-        $('.stars').rating();
+
+    // globalFilmData is the array of film objects retrieved from the OMDB API
+        
         return search.searchFirebase(user)
       })
       .then(function(firebaseData) {
-        console.log('firebaseData', firebaseData);
+        // console.log('firebaseData', firebaseData);
         firebaseArray = Object.keys(firebaseData).map(key => firebaseData[key]);
+        
+        // console.log('firebaseArray', firebaseArray);
+        // console.log('filmsToRender', filmsToRender);
+        console.log('globalFilmData', globalFilmData);
+        var imdbFilmArray = _.chain(firebaseData).pluck('imdbID').uniq().value();
+        console.log('imdbFilmArray', imdbFilmArray);
+        var filteredFilmData = globalFilmData.filter(function(value, index) {
+          console.log('$.inArray(value.imdbID, imdbFilmArray)', $.inArray(value.imdbID, imdbFilmArray));
+          console.log('imdbID', value.imdbID);
+          if ($.inArray(value.imdbID, imdbFilmArray) === -1) {
+            return true;
+          }
+        });
         console.log('firebaseArray', firebaseArray);
-        var filmsToRender = firebaseArray.concat(globalFilmData.Search);
-        console.log('filmsToRender', filmsToRender);
-        $('#output').append(searchHbs({'Search': filmsToRender}));
+        console.log('filteredFilmData', filteredFilmData);
+        var concatFilmArray = firebaseArray.concat(filteredFilmData);
+        console.log('concatFilmArray',concatFilmArray);
+        $('#output').html(searchHbs({'Search': concatFilmArray}));
         $('.stars').rating();
       });
+      
 
   });
 
