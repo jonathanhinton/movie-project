@@ -15,6 +15,7 @@ requirejs.config({
     }
 });
 
+
 require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register', 'login', 'addMovie', 'bootstrap-star-rating', 'eraseFilm', 'watchedMovie'],
   function($, search, getFilms, _, searchHbs, register, login, addMovie, starRating, eraseFilm, watchedMovie) {
 
@@ -23,18 +24,50 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 
   $('#submit').click(function(e) {
     var globalFilmData;
-    var globalIds;
+    var firebaseArray = [];
 
     e.preventDefault();
 
     search.searchFilms()
     .then(function(filmData) {
+        globalFilmData = filmData.Search;
+        console.log('globalFilmData', globalFilmData);
+
+
+    // globalFilmData is the array of film objects retrieved from the OMDB API
+
+        return search.searchFirebase(user);
+      })
+      .then(function(firebaseData) {
+        // console.log('firebaseData', firebaseData);
+        firebaseArray = Object.keys(firebaseData).map(key => firebaseData[key]);
+
+        // console.log('firebaseArray', firebaseArray);
+        // console.log('filmsToRender', filmsToRender);
+        console.log('globalFilmData', globalFilmData);
+        var imdbFilmArray = _.chain(firebaseData).pluck('imdbID').uniq().value();
+        console.log('imdbFilmArray', imdbFilmArray);
+        var filteredFilmData = globalFilmData.filter(function(value, index) {
+          console.log('$.inArray(value.imdbID, imdbFilmArray)', $.inArray(value.imdbID, imdbFilmArray));
+          console.log('imdbID', value.imdbID);
+          if ($.inArray(value.imdbID, imdbFilmArray) === -1) {
+            return true;
+          }
+        });
+        console.log('firebaseArray', firebaseArray);
+        console.log('filteredFilmData', filteredFilmData);
+        var concatFilmArray = firebaseArray.concat(filteredFilmData);
+        console.log('concatFilmArray',concatFilmArray);
+        $('#output').html(searchHbs({'Search': concatFilmArray}));
+        $('.stars').rating();
+      });
+
+  }).then(function(filmData) {
       globalFilmData = filmData;
       // console.log('globalFilmData', globalFilmData);
       $('#output').html(searchHbs(globalFilmData));
       $('.stars').rating();
     }).done();
-  });
 
   $(document).on('click', '.addFilm', function(e) {
   	var filmID = this.id;
@@ -76,6 +109,9 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     console.log(this);
     $(this).find('.glyphicon').removeClass("glyphicon-eye-open").addClass("glyphicon-ok");
     $(this).parent().hide().fadeIn("slow");
+
   });
 
 });
+
+
