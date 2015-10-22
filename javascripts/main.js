@@ -32,10 +32,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     .then(function(filmData) {
         globalFilmData = filmData.Search;
         console.log('globalFilmData', globalFilmData);
-
-
     // globalFilmData is the array of film objects retrieved from the OMDB API
-
         return search.searchFirebase(user);
       })
       .then(function(firebaseData) {
@@ -61,13 +58,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('#output').html(searchHbs({'Search': concatFilmArray}));
         $('.stars').rating();
       });
-
-  }).then(function(filmData) {
-      globalFilmData = filmData;
-      // console.log('globalFilmData', globalFilmData);
-      $('#output').html(searchHbs(globalFilmData));
-      $('.stars').rating();
-    }).done();
+  });
 
   $(document).on('click', '.addFilm', function(e) {
   	var filmID = this.id;
