@@ -33,8 +33,9 @@ require(['jquery', 'lodash', 'login', 'search', 'getFilms', 'addMovie', 'hbs!../
         globalFilmData = filmData.Search;
         console.log('globalFilmData', globalFilmData);
 
+
     // globalFilmData is the array of film objects retrieved from the OMDB API
-        
+    
         return search.searchFirebase(user)
       })
       .then(function(firebaseData) {
@@ -59,8 +60,7 @@ require(['jquery', 'lodash', 'login', 'search', 'getFilms', 'addMovie', 'hbs!../
         console.log('concatFilmArray',concatFilmArray);
         $('#output').html(searchHbs({'Search': concatFilmArray}));
         $('.stars').rating();
-      });
-      
+      });    
 
   });
 
@@ -82,29 +82,7 @@ require(['jquery', 'lodash', 'login', 'search', 'getFilms', 'addMovie', 'hbs!../
     });
       console.log('Remove button clicked');
     // Create promise and callback to remove film from Firebase
-  });
-
-  });
-
-// Inside this function, we want to insert a conditional statement that says 'if you rate this film, then you watched it,' and the rating gets pushed (along with the film object) to the user's Firebase.
-  
-
-  $(document).on('rating.change', '.stars', function(e, value, caption) {
-    // console.log('value', value);
-    var filmID = this.id;
-    console.log('filmID', filmID);
-    getFilms.getFilm(filmID)
-    .then(function(filmObj) {
-      addMovie.addMovie(user, filmObj, value);  
-    });
-      // console.log('value', value);
-      // console.log('filmObj.imdbID', filmObj.imdbID);
-      // console.log('value', value);
-      // if ((ref.child('profiles').child(user).child(this.id)) === (filmObj.imdbID)) {
-      //   ref.child('profiles').child(user).child(this.id).child('rating').set(value);
-      //   } else {
-      //   }
-  
+  }); 
 
     
   });

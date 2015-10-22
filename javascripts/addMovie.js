@@ -14,6 +14,7 @@ define(["jquery"], function($) {
         imdbID: film.imdbID,
         rating : value || 0,
         Poster : "http://img.omdbapi.com/?i=" + film.imdbID + "&apikey=8513e0a1"
+
       };
 
       ref.child("profiles").child(uid).child(film.imdbID).set(firebaseFilm);
