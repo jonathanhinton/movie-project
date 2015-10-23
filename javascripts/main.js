@@ -18,8 +18,8 @@ requirejs.config({
 
 require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register', 'login', 'addMovie', 'bootstrap-star-rating', 'eraseFilm', 'watchedMovie'],
   function($, search, getFilms, _, searchHbs, register, login, addMovie, starRating, eraseFilm, watchedMovie) {
-
-  var ref = new Firebase("https://movie-history-project.firebaseio.com");
+//JONATHAN COMMENT: changing all firebase url's to movie-viewer
+  var ref = new Firebase("https://movie-viewer.firebaseio.com");
   var user = ref.getAuth().uid;
 
   $('#submit').click(function(e) {
@@ -36,12 +36,12 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         return search.searchFirebase(user);
       })
       .then(function(firebaseData) {
-        // console.log('firebaseData', firebaseData);
+        console.log('firebaseData', firebaseData);
         firebaseArray = Object.keys(firebaseData).map(key => firebaseData[key]);
 
-        // console.log('firebaseArray', firebaseArray);
+        console.log('firebaseArray', firebaseArray);
         // console.log('filmsToRender', filmsToRender);
-        console.log('globalFilmData', globalFilmData);
+        // console.log('globalFilmData', globalFilmData);
         var imdbFilmArray = _.chain(firebaseData).pluck('imdbID').uniq().value();
         console.log('imdbFilmArray', imdbFilmArray);
         var filteredFilmData = globalFilmData.filter(function(value, index) {

@@ -2,7 +2,7 @@ define(function(require) {
 
   var $ = require('jquery');
 
-  var registerRef = new Firebase('https://movie-history-project.firebaseio.com/');
+  var registerRef = new Firebase('https://movie-viewer.firebaseio.com/');
 
   $('#registerButton').click(function(e) {
 

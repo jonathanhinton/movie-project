@@ -2,7 +2,7 @@ define(function(require) {
 
 	var $ = require('jquery');
 	var q = require('q');
-  var loginRef = new Firebase("https://movie-history-project.firebaseio.com/");
+  var loginRef = new Firebase("https://movie-viewer.firebaseio.com/");
   var userAuth = loginRef.getAuth();
 
   if(userAuth) {
@@ -21,7 +21,7 @@ define(function(require) {
                     url: 'http://www.omdbapi.com/?s=' + query
 			}).done(function(searchData) {
           deferred.resolve(searchData);
-          // console.log('Search data from OMDB API = ', searchData);
+          console.log('Search data from OMDB API = ', searchData);
 			}).fail(function(xhr, status, error) {
           deferred.reject(error);
           });
@@ -34,11 +34,11 @@ define(function(require) {
 
 			var deferred = q.defer();
 			var query = $('#search').val();
-			var URL = 'https://movie-history-project.firebaseio.com/profiles';
+			var URL = 'https://movie-viewer.firebaseio.com/users';
 
 			$.ajax({
 				type: 'GET',
-				url: 'https://movie-history-project.firebaseio.com/profiles/' + uid +'.json'
+				url: 'https://movie-viewer.firebaseio.com/users/' + uid +'.json'
 			}).done(function(firebaseData) {
 					deferred.resolve(firebaseData);
 					// console.log('Search data from Firebase = ', firebaseData);
@@ -48,7 +48,7 @@ define(function(require) {
 
 			return deferred.promise;
 
-		}		
+		}
 
 	}; // End of return statement
 
