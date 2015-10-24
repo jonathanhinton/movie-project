@@ -1,4 +1,4 @@
- /* jshint esnext: true */
+/* jshint esnext: true */
 requirejs.config({
   baseUrl: './javascripts',
   paths: {
@@ -22,6 +22,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 //JONATHAN COMMENT: changing all firebase url's to movie-viewer
   var ref = new Firebase("https://movie-viewer.firebaseio.com");
   var user = ref.getAuth().uid;
+  search.currentState(user);
 
   $('#submit').click(function(e) {
     var globalFilmData;
@@ -42,7 +43,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 
       //   console.log('firebaseArray', firebaseArray);
       //   // console.log('filmsToRender', filmsToRender);
-      //   // console.log('globalFilmData', globalFilmData);
+      //   console.log('globalFilmData', globalFilmData);
       //   var imdbFilmArray = _.chain(firebaseData).pluck('imdbID').uniq().value();
       //   console.log('imdbFilmArray', imdbFilmArray);
       //   var filteredFilmData = globalFilmData.filter(function(value, index) {
@@ -53,38 +54,38 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
       //     }
       //   });
       //   console.log('firebaseArray', firebaseArray);
-      //   console.log('filteredFilmData', filteredFilmData);
+      //   // console.log('filteredFilmData', filteredFilmData);
       //   var concatFilmArray = firebaseArray.concat(filteredFilmData);
-      //   console.log('concatFilmArray',globalFilmData);
+      //   console.log('concatFilmArray',concatFilmArray);
         $('#output').html(searchHbs({'Search': globalFilmData}));
         $('.stars').rating();
       });
   });
-
+//ADD functionality working as of 10/24
   $(document).on('click', '.addFilm', function(e) {
-    var filmID = this.id;
-    console.log('filmID', filmID);
-    getFilms.getFilm(filmID)
+  	var filmID = this.id;
+    console.log('userID, filmID', user, filmID);
+    getFilms.getOmdbFilm(filmID)
     .then(function(filmObj) {
-      // console.log('filmObj', filmObj);
-      var user = ref.getAuth().uid;
+      console.log('filmObj', filmObj);
       // console.log("user", user);
       addMovie.addMovie(user, filmObj);
     });
     console.log(this);
     $(this).hide();
   });
-
+//RATING functionality marginal as of 10/24
   $(document).on('rating.change', '.stars', function(e, value, caption) {
     // console.log('value', value);
     var filmID = this.id;
     console.log('filmID', filmID);
-    getFilms.getFilm(filmID)
+    getFilms.getUserFilm(user, filmID)
     .then(function(filmObj) {
-      addMovie.addMovie(user, filmObj, value);
+      addMovie.addRating(user, filmObj, value);
     });
   });
 
+//DELETE functionality working as of 10/24
   $(document).on('click', '.delete-movie', function() {
 
     // console.log("delete button clicked");
@@ -93,6 +94,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     $(this).parent().hide();
   });
 
+//WATCHED functionality working as of 10/24
   $(document).on("click", ".watched-movie", function() {
 
     console.log("watched button clicked");

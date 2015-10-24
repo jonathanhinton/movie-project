@@ -4,14 +4,28 @@ define(function(require) {
 	var q = require('q');
 
 	return {
+		getOmdbFilm : function(imdbID) {
+      var deferred = q.defer();
+      //ajax call using promises
+      $.ajax({ url : "http://www.omdbapi.com/?i=" + imdbID + "&y=&plot=short&r=json" }).done(function(myMovie){
+        console.log("myMovie", myMovie);
+        //return movie object Search key value
+        deferred.resolve(myMovie);
+      })
+    .fail(function(xhr, status, error){
+      deferred.reject(error);
+    });
+    return deferred.promise;
 
-		getFilm: function(filmID) {
+
+		}, //End of getOmdbFilm defenition
+		getUserFilm: function(uid, filmID) {
 
 			var deferred = q.defer();
 
 			$.ajax({
 				type: 'GET',
-	                  url: 'http://www.omdbapi.com/?i=' + filmID
+	      url: 'https://movie-viewer.firebaseio.com/users/' + uid +'/' + filmID + '.json'
 				}).done(function(filmObj) {
 					deferred.resolve(filmObj);
 					// console.log('filmObj', filmObj);

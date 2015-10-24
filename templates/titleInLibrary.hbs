@@ -1,0 +1,21 @@
+{{#each Search}}
+<div class='col-md-3' id="movie">
+    <button class='delete-movie' id='{{ imdbID }}'>
+        <span class='glyphicon glyphicon-remove-circle'></span>
+    </button>
+  <img src='{{Poster}}' class='img-responsive'>
+  <div>{{ Title }}</div>
+  <div>{{ Year }}</div>
+  <div>{{ Actors }}</div>
+  {{#if watched}}
+    <span class='glyphicon glyphicon-ok'></span>
+  {{else}}
+  <button class='watched-movie' id='{{ imdbID }}'>
+      <span class='glyphicon glyphicon-eye-open'></span>
+  </button>
+  {{/if}}
+  <input class='stars' id='{{ imdbID }}' data-stars='10' data-size="xs" data-max="10" data-step="1" data-showCaption="false" />
+</div>
+{{/each}}
+
+{{!-- http://img.omdbapi.com/?i={{ imdbID }}&apikey=8513e0a1 --}}

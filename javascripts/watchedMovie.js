@@ -1,6 +1,6 @@
 define(function(require) {
 
-  var $ = "jquery";
+  var $ = require("jquery");
   var ref = new Firebase("https://movie-viewer.firebaseio.com");
 
   return {
