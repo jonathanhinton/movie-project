@@ -86,6 +86,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     });
   });
 
+//DELETE functionality working as of 10/24
   $(document).on('click', '.delete-movie', function() {
 
     // console.log("delete button clicked");
@@ -94,6 +95,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     $(this).parent().hide();
   });
 
+//WATCHED functionality working as of 10/24
   $(document).on("click", ".watched-movie", function() {
 
     console.log("watched button clicked");

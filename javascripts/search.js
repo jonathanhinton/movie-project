@@ -64,6 +64,7 @@ define(function(require) {
         var originalMoviesArray = allMoviesArray.slice();
 
         $("#output").html(inMyLibHbs({'Search' : allMoviesObject.movies}));
+        $('.stars').rating();
       });
     } //end of currentState method
 
