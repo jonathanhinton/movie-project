@@ -7,12 +7,6 @@
   <div>{{ Title }}</div>
   <div>{{ Year }}</div>
   <div>{{ Actors }}</div>
-  {{#if added}}
-  {{else}}
-  <button class='addFilm' id={{ imdbID }}>
-    <span class='glyphicon glyphicon-plus'></span>
-  </button>
-  {{/if}}
   {{#if watched}}
     <span class='glyphicon glyphicon-ok'></span>
   {{else}}

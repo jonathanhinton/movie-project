@@ -30,7 +30,7 @@ define(function(require) {
 
 			return deferred.promise;
 
-		},
+		}, //end of searchFilms method
 
 		searchFirebase: function(uid) {
 
@@ -50,7 +50,7 @@ define(function(require) {
 
 			return deferred.promise;
 
-		},
+		}, //end of searchFirebase method
 
     currentState: function(uid) {
       loginRef.child("users/" + uid).on("value", function(snapshot){
@@ -65,7 +65,7 @@ define(function(require) {
 
         $("#output").html(inMyLibHbs({'Search' : allMoviesObject.movies}));
       });
-    }
+    } //end of currentState method
 
 	}; // End of return statement
 
