@@ -86,12 +86,21 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
   });
 
 //DELETE functionality working as of 10/24
-  $(document).on('click', '.delete-movie', function() {
+  // $(document).on('click', '.delete-movie', function() {
 
+  //   // console.log("delete button clicked");
+  //   var filmID = this.id;
+  //   $(this).parent().hide('fast');
+  //   eraseFilm.eraseFilm(user, filmID);
+  // });
+
+//MAKE INACTIVE IN SEARCH : can hide from the DOM and set a key of invisible to true.
+    $(document).on('click', '.delete-movie', function() {
     // console.log("delete button clicked");
     var filmID = this.id;
-    eraseFilm.eraseFilm(user, filmID);
-    $(this).parent().hide();
+    // eraseFilm.eraseFilm(user, filmID);
+    eraseFilm.hideFilm(user, filmID);
+    $(this).parent().hide('fast');
   });
 
 //WATCHED functionality working as of 10/24
