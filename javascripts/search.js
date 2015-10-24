@@ -3,7 +3,7 @@ define(function(require) {
 
 	var $ = require('jquery');
 	var q = require('q');
-  var searchHBS = require("hbs!../templates/titleSearch");
+  var inMyLibHbs = require("hbs!../templates/titleInLibrary");
   var loginRef = new Firebase("https://movie-viewer.firebaseio.com/");
   var userAuth = loginRef.getAuth();
 
@@ -63,7 +63,7 @@ define(function(require) {
         // console.log("allMoviesObject", allMoviesObject);
         var originalMoviesArray = allMoviesArray.slice();
 
-        $("#output").html(searchHBS({Search : allMoviesObject.movies}));
+        $("#output").html(inMyLibHbs({'Search' : allMoviesObject.movies}));
       });
     }
 
