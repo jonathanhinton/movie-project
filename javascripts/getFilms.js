@@ -5,13 +5,13 @@ define(function(require) {
 
 	return {
 
-		getFilm: function(filmID) {
+		getFilm: function(uid, filmID) {
 
 			var deferred = q.defer();
 
 			$.ajax({
 				type: 'GET',
-	                  url: 'http://www.omdbapi.com/?i=' + filmID
+	      url: 'https://movie-viewer.firebaseio.com/users/' + uid +'/' + filmID + '.json'
 				}).done(function(filmObj) {
 					deferred.resolve(filmObj);
 					// console.log('filmObj', filmObj);

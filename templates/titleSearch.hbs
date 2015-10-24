@@ -3,7 +3,7 @@
     <button class='delete-movie' id={{ imdbID }}>
         <span class='glyphicon glyphicon-remove-circle'></span>
     </button>
-	<img src='http://img.omdbapi.com/?i={{ imdbID }}&apikey=8513e0a1' class='img-responsive'>
+	<img src='{{Poster}}' class='img-responsive'>
 	<div>{{ Title }}</div>
 	<div>{{ Year }}</div>
 	<div>{{ Actors }}</div>
@@ -23,3 +23,5 @@
   <input class='stars' id={{ imdbID }} />
 </div>
 {{/each}}
+
+{{!-- http://img.omdbapi.com/?i={{ imdbID }}&apikey=8513e0a1 --}}

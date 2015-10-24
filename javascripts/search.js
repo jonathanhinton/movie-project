@@ -1,7 +1,9 @@
+/* jshint esnext: true */
 define(function(require) {
 
 	var $ = require('jquery');
 	var q = require('q');
+  var searchHBS = require("hbs!../templates/titleSearch");
   var loginRef = new Firebase("https://movie-viewer.firebaseio.com/");
   var userAuth = loginRef.getAuth();
 
@@ -17,8 +19,8 @@ define(function(require) {
 			var query = $('#search').val();
 
 			$.ajax({
-                    type: 'GET',
-                    url: 'http://www.omdbapi.com/?s=' + query
+          type: 'GET',
+          url: 'http://www.omdbapi.com/?s=' + query
 			}).done(function(searchData) {
           deferred.resolve(searchData);
           console.log('Search data from OMDB API = ', searchData);
@@ -48,7 +50,22 @@ define(function(require) {
 
 			return deferred.promise;
 
-		}
+		},
+
+    currentState: function(uid) {
+      loginRef.child("users/" + uid).on("value", function(snapshot){
+        var movies = snapshot.val();
+        // console.log("movies", movies);
+
+        var allMoviesArray = Object.keys(movies).map(key => movies[key]);
+        // console.log("allMoviesArray", allMoviesArray);
+        var allMoviesObject = {movies : allMoviesArray};
+        // console.log("allMoviesObject", allMoviesObject);
+        var originalMoviesArray = allMoviesArray.slice();
+
+        $("#output").html(searchHBS({Search : allMoviesObject.movies}));
+      });
+    }
 
 	}; // End of return statement
 

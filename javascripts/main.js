@@ -1,3 +1,4 @@
+/* jshint esnext: true */
 requirejs.config({
   baseUrl: './javascripts',
   paths: {
@@ -21,6 +22,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 //JONATHAN COMMENT: changing all firebase url's to movie-viewer
   var ref = new Firebase("https://movie-viewer.firebaseio.com");
   var user = ref.getAuth().uid;
+  search.currentState(user);
 
   $('#submit').click(function(e) {
     var globalFilmData;
@@ -30,7 +32,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 
     search.searchFilms()
     .then(function(filmData) {
-        globalFilmData = filmData.Search;
+        var globalFilmData = filmData.Search;
         console.log('globalFilmData', globalFilmData);
     // globalFilmData is the array of film objects retrieved from the OMDB API
         return search.searchFirebase(user);
@@ -41,7 +43,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 
         console.log('firebaseArray', firebaseArray);
         // console.log('filmsToRender', filmsToRender);
-        // console.log('globalFilmData', globalFilmData);
+        console.log('globalFilmData', globalFilmData);
         var imdbFilmArray = _.chain(firebaseData).pluck('imdbID').uniq().value();
         console.log('imdbFilmArray', imdbFilmArray);
         var filteredFilmData = globalFilmData.filter(function(value, index) {
@@ -52,7 +54,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
           }
         });
         console.log('firebaseArray', firebaseArray);
-        console.log('filteredFilmData', filteredFilmData);
+        // console.log('filteredFilmData', filteredFilmData);
         var concatFilmArray = firebaseArray.concat(filteredFilmData);
         console.log('concatFilmArray',concatFilmArray);
         $('#output').html(searchHbs({'Search': concatFilmArray}));
@@ -78,7 +80,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     // console.log('value', value);
     var filmID = this.id;
     console.log('filmID', filmID);
-    getFilms.getFilm(filmID)
+    getFilms.getFilm(user, filmID)
     .then(function(filmObj) {
       addMovie.addMovie(user, filmObj, value);
     });
