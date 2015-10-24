@@ -61,10 +61,9 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.stars').rating();
       });
   });
-
+//ADD functionality working as of 10/24
   $(document).on('click', '.addFilm', function(e) {
   	var filmID = this.id;
-    var user = ref.getAuth().uid;
     console.log('userID, filmID', user, filmID);
     getFilms.getOmdbFilm(filmID)
     .then(function(filmObj) {
@@ -80,7 +79,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     // console.log('value', value);
     var filmID = this.id;
     console.log('filmID', filmID);
-    getFilms.getFilm(user, filmID)
+    getFilms.getUserFilm(user, filmID)
     .then(function(filmObj) {
       addMovie.addMovie(user, filmObj, value);
     });
