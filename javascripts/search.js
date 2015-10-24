@@ -1,55 +1,55 @@
 define(function(require) {
 
-	var $ = require('jquery');
-	var q = require('q');
-  var loginRef = new Firebase("https://movie-history-project.firebaseio.com/");
+  var $ = require('jquery');
+  var q = require('q');
+  var loginRef = new Firebase("https://movie-viewer.firebaseio.com/");
   var userAuth = loginRef.getAuth();
 
   if(userAuth) {
     console.log("Authenticated user with uid:", userAuth.uid);
   }
 
-	return {
+  return {
 
-		searchFilms: function() {
+    searchFilms: function() {
 
-			var deferred = q.defer();
-			var query = $('#search').val();
+      var deferred = q.defer();
+      var query = $('#search').val();
 
-			$.ajax({
+      $.ajax({
                     type: 'GET',
                     url: 'http://www.omdbapi.com/?s=' + query
-			}).done(function(searchData) {
+      }).done(function(searchData) {
           deferred.resolve(searchData);
-          // console.log('Search data from OMDB API = ', searchData);
-			}).fail(function(xhr, status, error) {
+          console.log('Search data from OMDB API = ', searchData);
+      }).fail(function(xhr, status, error) {
           deferred.reject(error);
           });
 
-			return deferred.promise;
+      return deferred.promise;
 
-		},
+    },
 
-		searchFirebase: function(uid) {
+    searchFirebase: function(uid) {
 
-			var deferred = q.defer();
-			var query = $('#search').val();
-			var URL = 'https://movie-history-project.firebaseio.com/profiles';
+      var deferred = q.defer();
+      var query = $('#search').val();
+      var URL = 'https://movie-viewer.firebaseio.com/users';
 
-			$.ajax({
-				type: 'GET',
-				url: 'https://movie-history-project.firebaseio.com/profiles/' + uid +'.json'
-			}).done(function(firebaseData) {
-					deferred.resolve(firebaseData);
-					// console.log('Search data from Firebase = ', firebaseData);
-			}).fail(function(xhr, status, error) {
-				deferred.reject(error);
-			});
+      $.ajax({
+          type: 'GET',
+          url: 'https://movie-viewer.firebaseio.com/users/' + uid +'.json'
+      }).done(function(firebaseData) {
+              deferred.resolve(firebaseData);
+              // console.log('Search data from Firebase = ', firebaseData);
+      }).fail(function(xhr, status, error) {
+          deferred.reject(error);
+      });
 
-			return deferred.promise;
+      return deferred.promise;
 
-		}		
+    }
 
-	}; // End of return statement
+  }; // End of return statement
 
 }); // End of module definition

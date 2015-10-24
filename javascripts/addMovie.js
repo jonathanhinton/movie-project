@@ -1,6 +1,6 @@
 define(["jquery"], function($) {
 
-  var ref = new Firebase("https://movie-history-project.firebaseio.com/");
+  var ref = new Firebase("https://movie-viewer.firebaseio.com/");
 
   return {
 
@@ -16,7 +16,7 @@ define(["jquery"], function($) {
         Added : true
       };
 
-      ref.child("profiles").child(uid).child(film.imdbID).set(firebaseFilm);
+      ref.child("users").child(uid).child(film.imdbID).set(firebaseFilm);
 
       console.log("new movie", firebaseFilm);
 
