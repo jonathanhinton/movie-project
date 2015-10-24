@@ -20,6 +20,15 @@
       <span class='glyphicon glyphicon-eye-open'></span>
   </button>
   {{/if}}
-  <input class='stars' id={{ imdbID }} />
+  <input class='stars'  data-max='10' data-step='1' data-stars='10'  data-size='xs' data-showCaption='false' id={{ imdbID }} />
+
+
+{{!-- <input id="input-2a" class="rating" data-min="0" data-max="8" data-step="1" data-stars=8
+    data-glyphicon="false">
+<input id="input-2b" class="rating" data-min="0" data-max="5" data-step="0.5" data-stars=5
+    data-symbol="&#xe005;" data-default-caption="{rating} hearts" data-star-captions="{}">
+ --}}
+
+
 </div>
 {{/each}}
