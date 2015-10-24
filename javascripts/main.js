@@ -35,40 +35,40 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         var globalFilmData = filmData.Search;
         console.log('globalFilmData', globalFilmData);
     // globalFilmData is the array of film objects retrieved from the OMDB API
-        return search.searchFirebase(user);
-      })
-      .then(function(firebaseData) {
-        console.log('firebaseData', firebaseData);
-        firebaseArray = Object.keys(firebaseData).map(key => firebaseData[key]);
+      //   return search.searchFirebase(user);
+      // })
+      // .then(function(firebaseData) {
+      //   console.log('firebaseData', firebaseData);
+      //   firebaseArray = Object.keys(firebaseData).map(key => firebaseData[key]);
 
-        console.log('firebaseArray', firebaseArray);
-        // console.log('filmsToRender', filmsToRender);
-        console.log('globalFilmData', globalFilmData);
-        var imdbFilmArray = _.chain(firebaseData).pluck('imdbID').uniq().value();
-        console.log('imdbFilmArray', imdbFilmArray);
-        var filteredFilmData = globalFilmData.filter(function(value, index) {
-          console.log('$.inArray(value.imdbID, imdbFilmArray)', $.inArray(value.imdbID, imdbFilmArray));
-          console.log('imdbID', value.imdbID);
-          if ($.inArray(value.imdbID, imdbFilmArray) === -1) {
-            return true;
-          }
-        });
-        console.log('firebaseArray', firebaseArray);
-        // console.log('filteredFilmData', filteredFilmData);
-        var concatFilmArray = firebaseArray.concat(filteredFilmData);
-        console.log('concatFilmArray',concatFilmArray);
-        $('#output').html(searchHbs({'Search': concatFilmArray}));
+      //   console.log('firebaseArray', firebaseArray);
+      //   // console.log('filmsToRender', filmsToRender);
+      //   console.log('globalFilmData', globalFilmData);
+      //   var imdbFilmArray = _.chain(firebaseData).pluck('imdbID').uniq().value();
+      //   console.log('imdbFilmArray', imdbFilmArray);
+      //   var filteredFilmData = globalFilmData.filter(function(value, index) {
+      //     console.log('$.inArray(value.imdbID, imdbFilmArray)', $.inArray(value.imdbID, imdbFilmArray));
+      //     console.log('imdbID', value.imdbID);
+      //     if ($.inArray(value.imdbID, imdbFilmArray) === -1) {
+      //       return true;
+      //     }
+      //   });
+      //   console.log('firebaseArray', firebaseArray);
+      //   // console.log('filteredFilmData', filteredFilmData);
+      //   var concatFilmArray = firebaseArray.concat(filteredFilmData);
+      //   console.log('concatFilmArray',concatFilmArray);
+        $('#output').html(searchHbs({'Search': globalFilmData}));
         $('.stars').rating();
       });
   });
 
   $(document).on('click', '.addFilm', function(e) {
   	var filmID = this.id;
-  	console.log('filmID', filmID);
-  	getFilms.getFilm(filmID)
-  	.then(function(filmObj) {
-      // console.log('filmObj', filmObj);
-      var user = ref.getAuth().uid;
+    var user = ref.getAuth().uid;
+    console.log('userID, filmID', user, filmID);
+    getFilms.getOmdbFilm(filmID)
+    .then(function(filmObj) {
+      console.log('filmObj', filmObj);
       // console.log("user", user);
       addMovie.addMovie(user, filmObj);
   	});
