@@ -74,14 +74,14 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     console.log(this);
     $(this).hide();
   });
-
+//RATING functionality marginal as of 10/24
   $(document).on('rating.change', '.stars', function(e, value, caption) {
     // console.log('value', value);
     var filmID = this.id;
     console.log('filmID', filmID);
     getFilms.getUserFilm(user, filmID)
     .then(function(filmObj) {
-      addMovie.addMovie(user, filmObj, value);
+      addMovie.addRating(user, filmObj, value);
     });
   });
 
