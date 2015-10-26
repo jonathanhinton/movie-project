@@ -14,7 +14,8 @@ define(["jquery"], function($) {
         rating : value || 0,
         Poster : "http://img.omdbapi.com/?i=" + film.imdbID + "&apikey=8513e0a1",
         Added : true,
-        imdbID : film.imdbID
+        imdbID : film.imdbID,
+        invisible : false
       };
 
       ref.child("users").child(uid).child(film.imdbID).set(firebaseFilm);
@@ -32,7 +33,8 @@ define(["jquery"], function($) {
         rating : value || 0,
         Poster : "http://img.omdbapi.com/?i=" + film.imdbID + "&apikey=8513e0a1",
         Added : true,
-        imdbID : film.imdbID
+        imdbID : film.imdbID,
+        invisible : false
       };
 
       ref.child("users").child(uid).child(film.imdbID).set(firebaseFilm);

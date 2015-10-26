@@ -22,6 +22,7 @@
     "q": "1.0.1",
     "require-handlebars-plugin": "~0.11.3",
     "bootstrap-star-rating": "~3.5.4",
-    "raty": "~2.7.0"
+    "raty": "~2.7.0",
+    "seiyria-bootstrap-slider": "~5.2.4"
   }
 }
