@@ -8,20 +8,25 @@ requirejs.config({
     'bootstrap': '../lib/bower_components/bootstrap/dist/js/bootstrap.min',
     'q': '../lib/bower_components/q/q',
     'firebase': '../lib/bower_components/firebase/firebase',
-    'bootstrap-star-rating': '../lib/bower_components/bootstrap-star-rating/js/star-rating.min'
+    'bootstrap-star-rating': '../lib/bower_components/bootstrap-star-rating/js/star-rating.min',
+    'seiyria-bootstrap-slider': '../lib/bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min'
   },
     shim: {
       'bootstrap': ['jquery'],
-      'bootstrap-star-rating': ['bootstrap']
+      'bootstrap-star-rating': ['bootstrap'],
+      'seiyria-bootstrap-slider': ['bootstrap']
     }
 });
 
 
-require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register', 'login', 'addMovie', 'bootstrap-star-rating', 'eraseFilm', 'watchedMovie'],
-  function($, search, getFilms, _, searchHbs, register, login, addMovie, starRating, eraseFilm, watchedMovie) {
+require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch', 'register', 'login', 'addMovie', 'bootstrap-star-rating', 'seiyria-bootstrap-slider', 'eraseFilm', 'watchedMovie'],
+  function($, search, getFilms, _, searchHbs, register, login, addMovie, starRating, bootstrapSlider, eraseFilm, watchedMovie) {
 //JONATHAN COMMENT: changing all firebase url's to movie-viewer
   var ref = new Firebase("https://movie-viewer.firebaseio.com");
   var user = ref.getAuth().uid;
+  var mySlider = $("input.slider").slider();
+  var value = mySlider.slider('getValue');
+
 //LOADS CURRENT STATE SNAPSHOT FROM FIREBASE
 
   $('#submit').click(function(e) {
@@ -75,6 +80,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     console.log(this);
     $(this).hide();
   });
+
 //RATING functionality marginal as of 10/24
   $(document).on('rating.change', '.stars', function(e, value, caption) {
     // console.log('value', value);
@@ -130,6 +136,10 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     // $(".viewed-true").show('fast');
     // $(".viewed-false").show('fast');
     search.currentState(user);
+  });
+//LOGOUT FUNCTIONALITY
+  $(document).on("click", "#logOut", function(){
+    window.location = "/index.html";
   });
 });
 

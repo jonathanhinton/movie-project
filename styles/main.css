@@ -10,6 +10,9 @@
   border-radius: 10px;
   margin: 10px; }
 
+.slider {
+  margin: 0 0 0 10px; }
+
 .jumbotron {
   background-image: url("http://www.thejakartapost.com/files/images2/03IMovies.img_assist_custom-510x248.jpg"); }
 
