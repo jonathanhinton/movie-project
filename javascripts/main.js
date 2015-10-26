@@ -22,13 +22,14 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 //JONATHAN COMMENT: changing all firebase url's to movie-viewer
   var ref = new Firebase("https://movie-viewer.firebaseio.com");
   var user = ref.getAuth().uid;
-  search.currentState(user);
+//LOADS CURRENT STATE SNAPSHOT FROM FIREBASE
 
   $('#submit').click(function(e) {
     var globalFilmData;
     var firebaseArray = [];
 
     e.preventDefault();
+    search.currentState(user);
 
     search.searchFilms()
     .then(function(filmData) {
@@ -70,6 +71,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
       console.log('filmObj', filmObj);
       // console.log("user", user);
       addMovie.addMovie(user, filmObj);
+      search.currentState(user);
   	});
     console.log(this);
     $(this).hide();
@@ -114,7 +116,24 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     $(this).parent().hide().fadeIn("slow");
 
   });
-
+  //EXPERIMENTAL SORT FUNCTIONALITY working as of 10/26 (show unwatched)
+  $(document).on("click", "#unviewed", function(){
+    $(".viewed-true").hide('fast');
+    $(".viewed-false").show('fast');
+    console.log("click");
+  });
+//EXPERIMENTAL SORT FUNCTIONALITY working as of 10/26 (show watched)
+  $(document).on("click", "#viewed", function(){
+    $(".viewed-true").show('fast');
+    $(".viewed-false").hide('fast');
+    console.log("click");
+  });
+//EXPERIMENTAL SORT FUNCTIONALITY working as of 10/26 (show all Films)
+  $(document).on("click", "#allFilms", function(){
+    $(".viewed-true").show('fast');
+    $(".viewed-false").show('fast');
+    console.log("click");
+  });
 });
 
 
