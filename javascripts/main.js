@@ -22,6 +22,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 //JONATHAN COMMENT: changing all firebase url's to movie-viewer
   var ref = new Firebase("https://movie-viewer.firebaseio.com");
   var user = ref.getAuth().uid;
+  var rating = 0;
   search.currentState(user);
 
   $('#submit').click(function(e) {
@@ -61,7 +62,12 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.stars').rating();
       });
   });
-//ADD functionality working as of 10/24
+//ADD functionality working as of 10/24//
+  $(document).on('change', '#rateSlider', function(e) {
+    console.log("RateSlider Triggered Rating= ", rating);
+    rating = $('#rateSlider, value').val();
+  });
+
   $(document).on('click', '.addFilm', function(e) {
   	var filmID = this.id;
     console.log('userID, filmID', user, filmID);
@@ -95,15 +101,27 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
   });
 
 //WATCHED functionality working as of 10/24
-  $(document).on("click", ".watched-movie", function() {
+  $(document).on("click", "#watched-movie", function() {
 
     console.log("watched button clicked");
     var filmID = this.id;
+    console.log("filmID= ", this);
+
     watchedMovie.watchedMovie(user, this.id);
     console.log(this);
     $(this).find('.glyphicon').removeClass("glyphicon-eye-open").addClass("glyphicon-ok");
     $(this).parent().hide().fadeIn("slow");
 
+  });
+
+  $("#filter-watched").on('click', function() {
+
+    $('#movie').each(function() {
+      console.log("Movie Filter Watched");
+      $(".viewed-true").show('fast');
+      $(".viewed-false").hide('fast');
+
+    });
   });
 
 });
