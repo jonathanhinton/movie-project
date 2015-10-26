@@ -1,25 +1,22 @@
 {{#each Search}}
 <div class='col-md-3' id="movie">
-    <button class='delete-movie' id={{ imdbID }}>
+    <button class='delete-movie' id='{{ imdbID }}'>
         <span class='glyphicon glyphicon-remove-circle'></span>
     </button>
 	<img src='http://img.omdbapi.com/?i={{ imdbID }}&apikey=8513e0a1' class='img-responsive'>
 	<div>{{ Title }}</div>
 	<div>{{ Year }}</div>
 	<div>{{ Actors }}</div>
-  {{#if added}}
-  {{else}}
-  <button class='addFilm' id={{ imdbID }}>
+  <button class='addFilm' id='{{ imdbID }}'>
     <span class='glyphicon glyphicon-plus'></span>
   </button>
-  {{/if}}
-  {{#if watched}}
+{{!--   {{#if watched}}
     <span class='glyphicon glyphicon-ok'></span>
   {{else}}
-  <button class='watched-movie' id={{ imdbID }}>
+  <button class='watched-movie' id='{{ imdbID }}'>
       <span class='glyphicon glyphicon-eye-open'></span>
   </button>
-  {{/if}}
-  <input class='stars' id={{ imdbID }} />
+  {{/if}} --}}
 </div>
 {{/each}}
+

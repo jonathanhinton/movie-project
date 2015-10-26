@@ -13,7 +13,28 @@ define(["jquery"], function($) {
         watched : false,
         rating : value || 0,
         Poster : "http://img.omdbapi.com/?i=" + film.imdbID + "&apikey=8513e0a1",
-        Added : true
+        Added : true,
+        imdbID : film.imdbID,
+        invisible : false
+      };
+
+      ref.child("users").child(uid).child(film.imdbID).set(firebaseFilm);
+
+      console.log("new movie", firebaseFilm);
+
+    },
+    addRating: function(uid, film, value) {
+
+      var firebaseFilm = {
+        Title : film.Title,
+        Year : film.Year,
+        Actors : film.Actors,
+        watched : true,
+        rating : value || 0,
+        Poster : "http://img.omdbapi.com/?i=" + film.imdbID + "&apikey=8513e0a1",
+        Added : true,
+        imdbID : film.imdbID,
+        invisible : false
       };
 
       ref.child("users").child(uid).child(film.imdbID).set(firebaseFilm);
