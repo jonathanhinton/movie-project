@@ -1,6 +1,6 @@
 {{#each Search}}
 <!-- CHANGED LINE 3 TO INSERT WATCHED AND RATING FOR EASIER SORTING -->
-<div class='col-md-3 viewed-{{watched}} rank-{{rating}}' id="movieInLib">
+<div class='col-md-3 viewed-{{watched}} rating-{{rating}}' id="movieInLib">
     <button class='delete-movie' id='{{ imdbID }}'>
         <span class='glyphicon glyphicon-remove-circle'></span>
     </button>
@@ -15,7 +15,7 @@
       <span class='glyphicon glyphicon-eye-open'></span>
   </button>
   {{/if}}
-  <input class='stars' id='{{ imdbID }}' data-stars='10' data-size="xs" data-max="10" data-step="1" data-showCaption="false"/>
+  <input class='stars' id='{{ imdbID }}' value='{{rating}}' data-stars='10' data-size="xs" data-max="10" data-step="1" data-showCaption="false"/>
 </div>
 {{/each}}
 
