@@ -71,7 +71,6 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
       console.log('filmObj', filmObj);
       // console.log("user", user);
       addMovie.addMovie(user, filmObj);
-      search.currentState(user);
   	});
     console.log(this);
     $(this).hide();
@@ -120,19 +119,17 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
   $(document).on("click", "#unviewed", function(){
     $(".viewed-true").hide('fast');
     $(".viewed-false").show('fast');
-    console.log("click");
   });
 //EXPERIMENTAL SORT FUNCTIONALITY working as of 10/26 (show watched)
   $(document).on("click", "#viewed", function(){
     $(".viewed-true").show('fast');
     $(".viewed-false").hide('fast');
-    console.log("click");
   });
 //EXPERIMENTAL SORT FUNCTIONALITY working as of 10/26 (show all Films)
   $(document).on("click", "#allFilms", function(){
-    $(".viewed-true").show('fast');
-    $(".viewed-false").show('fast');
-    console.log("click");
+    // $(".viewed-true").show('fast');
+    // $(".viewed-false").show('fast');
+    search.currentState(user);
   });
 });
 

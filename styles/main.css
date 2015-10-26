@@ -4,6 +4,12 @@
   border-radius: 10px;
   margin: 10px; }
 
+#movieInLib {
+  background-color: #337ab7;
+  border: 5px;
+  border-radius: 10px;
+  margin: 10px; }
+
 .jumbotron {
   background-image: url("http://www.thejakartapost.com/files/images2/03IMovies.img_assist_custom-510x248.jpg"); }
 
