@@ -1,5 +1,4 @@
 define(function(require) {
-
 	var $ = require('jquery');
 	var q = require('q');
 
@@ -20,7 +19,6 @@ define(function(require) {
 
 		}, //End of getOmdbFilm defenition
 		getUserFilm: function(uid, filmID) {
-
 			var deferred = q.defer();
 
 			$.ajax({

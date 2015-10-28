@@ -24,7 +24,6 @@ define(["jquery"], function($) {
 
     },
     addRating: function(uid, film, value) {
-
       var firebaseFilm = {
         Title : film.Title,
         Year : film.Year,

@@ -1,6 +1,7 @@
+{{log "HBS"}}
 {{#each Search}}
 <!-- CHANGED LINE 3 TO INSERT WATCHED AND RATING FOR EASIER SORTING -->
-<div class='col-md-3 viewed-{{watched}} rating-{{rating}}' id="movieInLib">
+<div class='col-md-3 viewed-{{watched}} rating-{{rating}} movieInLib '>
     <button class='delete-movie' id='{{ imdbID }}'>
         <span class='glyphicon glyphicon-remove-circle'></span>
     </button>
@@ -15,8 +16,9 @@
       <span class='glyphicon glyphicon-eye-open'></span>
   </button>
   {{/if}}
-  <input class='stars' id='{{ imdbID }}' value='{{rating}}' data-stars='10' data-size="xs" data-max="10" data-step="1" data-showCaption="false"/>
+  <input class='stars' id='{{ imdbID }}' value='{{rating}}' data-rate="{{rating}}" data-stars='10' data-size="xs" data-max="10" data-step="1" data-showCaption="false"/>
 </div>
 {{/each}}
 
 {{!-- http://img.omdbapi.com/?i={{ imdbID }}&apikey=8513e0a1 --}}
+

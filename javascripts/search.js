@@ -62,7 +62,7 @@ define(function(require) {
         var allMoviesObject = {movies : allMoviesArray};
         // console.log("allMoviesObject", allMoviesObject);
         var originalMoviesArray = allMoviesArray.slice();
-
+        console.log("allMoviesObject= ", allMoviesObject.movies);
         $("#output").html(inMyLibHbs({'Search' : allMoviesObject.movies}));
         $('.stars').rating();
       });

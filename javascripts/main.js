@@ -25,7 +25,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
   var ref = new Firebase("https://movie-viewer.firebaseio.com");
   var user = ref.getAuth().uid;
   var mySlider = $("input.slider").slider();
-  var value = mySlider.slider('getValue');
+  // var value = mySlider.slider('getValue');
 
 //LOADS CURRENT STATE SNAPSHOT FROM FIREBASE
 
@@ -94,6 +94,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     getFilms.getUserFilm(user, filmID)
     .then(function(filmObj) {
       addMovie.addRating(user, filmObj, value);
+      console.log("filmobj ",filmObj);
     });
   });
 
@@ -143,9 +144,49 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
     // $(".viewed-true").show('fast');
     // $(".viewed-false").show('fast');
     search.currentState(user);
+    console.log(this);
   });
 //LOGOUT FUNCTIONALITY
   $(document).on("click", "#logOut", function(){
     window.location = "/index.html";
+  });
+
+  $(document).on("mouseup", ".slider", function() {
+    console.log("Slider MouseUp");
+
+    // console.log("This.Rating= ",this.rating);
+
+    // When the Rate slider is released hide all but matched rate movies
+    $(".movieInLib").each(function(index) {
+      console.log( index + ": " + $( this ).text() );
+      // console.log("data-Rate= ",data-rate);
+      console.log("slider function");
+      console.log($(".rating").val());
+      var child = $(this).find(".stars");
+      console.log("This is ", $(this));
+      console.log("Child is ", child);
+      var value = mySlider.slider('getValue');
+      console.log("Value= ", value);
+      var rateVal = child.val();
+      // var rateVal = $(".stars").val(); // This is the closest to working
+      // rateVal = $("div input").val();
+      // var rateVal = stars.getAttribute("value");
+      // var rateVal = $(".stars input").val();
+      // var rateVal = $('data-rate').val();
+      // var rateVal = $( ".rating[attribute*='value']" ).val();
+      // var rateVal = $('data-stars').val();
+      // var rateVal = document.getElementByClassName('.stars').value;
+      // var rateVal = child.attr("value").val();
+      console.log("rateVal= ",rateVal);
+      // console.log("child",this.child.stars);
+      if (rateVal != value) {
+
+
+        $(this).hide('fast');
+      }
+      else
+        // console.log("This.Stars= ",this.stars);
+        console.log("MouseUp If else");
+    });
   });
 });
