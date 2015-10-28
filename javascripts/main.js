@@ -99,22 +99,22 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
   });
 
 //DELETE functionality working as of 10/24
-  $(document).on('click', '.delete-movie', function() {
+  // $(document).on('click', '.delete-movie', function() {
 
-    // console.log("delete button clicked");
-    var filmID = this.id;
-    $(this).parent().hide('fast');
-    eraseFilm.eraseFilm(user, filmID);
-  });
-
-//MAKE INACTIVE IN SEARCH : can hide from the DOM and set a key of invisible to true.
-  //   $(document).on('click', '.delete-movie', function() {
   //   // console.log("delete button clicked");
   //   var filmID = this.id;
-  //   // eraseFilm.eraseFilm(user, filmID);
-  //   eraseFilm.hideFilm(user, filmID);
   //   $(this).parent().hide('fast');
+  //   eraseFilm.eraseFilm(user, filmID);
   // });
+
+//MAKE INACTIVE IN SEARCH : can hide from the DOM and set a key of invisible to true.
+    $(document).on('click', '.delete-movie', function() {
+    // console.log("delete button clicked");
+    var filmID = this.id;
+    // eraseFilm.eraseFilm(user, filmID);
+    eraseFilm.hideFilm(user, filmID);
+    $(this).parent().hide('fast');
+  });
 
 //WATCHED functionality working as of 10/24
   $(document).on("click", "#watched-movie", function() {
@@ -153,13 +153,10 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
 
   $(document).on("mouseup", ".slider", function() {
     console.log("Slider MouseUp");
-
     // console.log("This.Rating= ",this.rating);
-
     // When the Rate slider is released hide all but matched rate movies
     $(".movieInLib").each(function(index) {
       console.log( index + ": " + $( this ).text() );
-      // console.log("data-Rate= ",data-rate);
       console.log("slider function");
       console.log($(".rating").val());
       var child = $(this).find(".stars");
@@ -168,24 +165,133 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
       var value = mySlider.slider('getValue');
       console.log("Value= ", value);
       var rateVal = child.val();
-      // var rateVal = $(".stars").val(); // This is the closest to working
-      // rateVal = $("div input").val();
-      // var rateVal = stars.getAttribute("value");
-      // var rateVal = $(".stars input").val();
-      // var rateVal = $('data-rate').val();
-      // var rateVal = $( ".rating[attribute*='value']" ).val();
-      // var rateVal = $('data-stars').val();
-      // var rateVal = document.getElementByClassName('.stars').value;
-      // var rateVal = child.attr("value").val();
       console.log("rateVal= ",rateVal);
       // console.log("child",this.child.stars);
-      if (rateVal != value) {
-
-
-        $(this).hide('fast');
+      if (value === 0) {
+        $('.rating-1').show('fast');
+        $('.rating-2').show('fast');
+        $('.rating-3').show('fast');
+        $('.rating-4').show('fast');
+        $('.rating-5').show('fast');
+        $('.rating-6').show('fast');
+        $('.rating-7').show('fast');
+        $('.rating-8').show('fast');
+        $('.rating-9').show('fast');
+        $('.rating-10').show('fast');
       }
-      else
+      else if (value === 1) {
+        $('.rating-1').show('fast');
+        $('.rating-2').hide('fast');
+        $('.rating-3').hide('fast');
+        $('.rating-4').hide('fast');
+        $('.rating-5').hide('fast');
+        $('.rating-6').hide('fast');
+        $('.rating-7').hide('fast');
+        $('.rating-8').hide('fast');
+        $('.rating-9').hide('fast');
+        $('.rating-10').hide('fast');
+      } else if (value === 2) {
+         $('.rating-1').hide('fast');
+        $('.rating-2').show('fast');
+        $('.rating-3').hide('fast');
+        $('.rating-4').hide('fast');
+        $('.rating-5').hide('fast');
+        $('.rating-6').hide('fast');
+        $('.rating-7').hide('fast');
+        $('.rating-8').hide('fast');
+        $('.rating-9').hide('fast');
+        $('.rating-10').hide('fast');
+      }  else if (value === 3) {
+        $('.rating-1').hide('fast');
+        $('.rating-2').hide('fast');
+        $('.rating-3').show('fast');
+        $('.rating-4').hide('fast');
+        $('.rating-5').hide('fast');
+        $('.rating-6').hide('fast');
+        $('.rating-7').hide('fast');
+        $('.rating-8').hide('fast');
+        $('.rating-9').hide('fast');
+        $('.rating-10').hide('fast');
+      }  else if (value === 4) {
+        $('.rating-1').hide('fast');
+        $('.rating-2').hide('fast');
+        $('.rating-3').hide('fast');
+        $('.rating-4').show('fast');
+        $('.rating-5').hide('fast');
+        $('.rating-6').hide('fast');
+        $('.rating-7').hide('fast');
+        $('.rating-8').hide('fast');
+        $('.rating-9').hide('fast');
+        $('.rating-10').hide('fast');
+      } else if (value === 5) {
+        $('.rating-1').hide('fast');
+        $('.rating-2').hide('fast');
+        $('.rating-3').hide('fast');
+        $('.rating-4').hide('fast');
+        $('.rating-5').show('fast');
+        $('.rating-6').hide('fast');
+        $('.rating-7').hide('fast');
+        $('.rating-8').hide('fast');
+        $('.rating-9').hide('fast');
+        $('.rating-10').hide('fast');
+      } else if (value === 6) {
+        $('.rating-1').hide('fast');
+        $('.rating-2').hide('fast');
+        $('.rating-3').hide('fast');
+        $('.rating-4').hide('fast');
+        $('.rating-5').hide('fast');
+        $('.rating-6').show('fast');
+        $('.rating-7').hide('fast');
+        $('.rating-8').hide('fast');
+        $('.rating-9').hide('fast');
+        $('.rating-10').hide('fast');
+      } else if (value === 7) {
+         $('.rating-1').hide('fast');
+        $('.rating-2').hide('fast');
+        $('.rating-3').hide('fast');
+        $('.rating-4').hide('fast');
+        $('.rating-5').hide('fast');
+        $('.rating-6').hide('fast');
+        $('.rating-7').show('fast');
+        $('.rating-8').hide('fast');
+        $('.rating-9').hide('fast');
+        $('.rating-10').hide('fast');
+      } else if (value === 8) {
+         $('.rating-1').hide('fast');
+        $('.rating-2').hide('fast');
+        $('.rating-3').hide('fast');
+        $('.rating-4').hide('fast');
+        $('.rating-5').hide('fast');
+        $('.rating-6').hide('fast');
+        $('.rating-7').hide('fast');
+        $('.rating-8').show('fast');
+        $('.rating-9').hide('fast');
+        $('.rating-10').hide('fast');
+      } else if (value === 9) {
+        $('.rating-1').hide('fast');
+        $('.rating-2').hide('fast');
+        $('.rating-3').hide('fast');
+        $('.rating-4').hide('fast');
+        $('.rating-5').hide('fast');
+        $('.rating-6').hide('fast');
+        $('.rating-7').hide('fast');
+        $('.rating-8').hide('fast');
+        $('.rating-9').show('fast');
+        $('.rating-10').hide('fast');
+      } else if (value === 10) {
+        $('.rating-1').hide('fast');
+        $('.rating-2').hide('fast');
+        $('.rating-3').hide('fast');
+        $('.rating-4').hide('fast');
+        $('.rating-5').hide('fast');
+        $('.rating-6').hide('fast');
+        $('.rating-7').hide('fast');
+        $('.rating-8').hide('fast');
+        $('.rating-9').hide('fast');
+        $('.rating-10').show('fast');
+      }
         // console.log("This.Stars= ",this.stars);
+        $(this).show('fast');
         console.log("MouseUp If else");
     });
   });
