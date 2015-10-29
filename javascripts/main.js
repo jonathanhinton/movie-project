@@ -168,6 +168,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
       console.log("rateVal= ",rateVal);
       // console.log("child",this.child.stars);
       if (value === 0) {
+        console.log("if val = 0");
         $('.rating-1').show('fast');
         $('.rating-2').show('fast');
         $('.rating-3').show('fast');
@@ -180,6 +181,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-10').show('fast');
       }
       else if (value === 1) {
+        console.log("if val = 1");
         $('.rating-1').show('fast');
         $('.rating-2').hide('fast');
         $('.rating-3').hide('fast');
@@ -191,7 +193,8 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-9').hide('fast');
         $('.rating-10').hide('fast');
       } else if (value === 2) {
-         $('.rating-1').hide('fast');
+        console.log("if val = 2");
+        $('.rating-1').hide('fast');
         $('.rating-2').show('fast');
         $('.rating-3').hide('fast');
         $('.rating-4').hide('fast');
@@ -202,6 +205,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-9').hide('fast');
         $('.rating-10').hide('fast');
       }  else if (value === 3) {
+        console.log("if val = 3");
         $('.rating-1').hide('fast');
         $('.rating-2').hide('fast');
         $('.rating-3').show('fast');
@@ -213,6 +217,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-9').hide('fast');
         $('.rating-10').hide('fast');
       }  else if (value === 4) {
+        console.log("if val = 4");
         $('.rating-1').hide('fast');
         $('.rating-2').hide('fast');
         $('.rating-3').hide('fast');
@@ -224,6 +229,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-9').hide('fast');
         $('.rating-10').hide('fast');
       } else if (value === 5) {
+        console.log("if val = 5");
         $('.rating-1').hide('fast');
         $('.rating-2').hide('fast');
         $('.rating-3').hide('fast');
@@ -235,6 +241,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-9').hide('fast');
         $('.rating-10').hide('fast');
       } else if (value === 6) {
+        console.log("if val = 6");
         $('.rating-1').hide('fast');
         $('.rating-2').hide('fast');
         $('.rating-3').hide('fast');
@@ -246,7 +253,8 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-9').hide('fast');
         $('.rating-10').hide('fast');
       } else if (value === 7) {
-         $('.rating-1').hide('fast');
+        console.log("if val = 7");
+        $('.rating-1').hide('fast');
         $('.rating-2').hide('fast');
         $('.rating-3').hide('fast');
         $('.rating-4').hide('fast');
@@ -257,7 +265,8 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-9').hide('fast');
         $('.rating-10').hide('fast');
       } else if (value === 8) {
-         $('.rating-1').hide('fast');
+        console.log("if val = 8");
+        $('.rating-1').hide('fast');
         $('.rating-2').hide('fast');
         $('.rating-3').hide('fast');
         $('.rating-4').hide('fast');
@@ -268,6 +277,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-9').hide('fast');
         $('.rating-10').hide('fast');
       } else if (value === 9) {
+        console.log("if val = 9");
         $('.rating-1').hide('fast');
         $('.rating-2').hide('fast');
         $('.rating-3').hide('fast');
@@ -279,6 +289,7 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-9').show('fast');
         $('.rating-10').hide('fast');
       } else if (value === 10) {
+        console.log("if val = 10");
         $('.rating-1').hide('fast');
         $('.rating-2').hide('fast');
         $('.rating-3').hide('fast');
@@ -291,8 +302,8 @@ require(['jquery', 'search', 'getFilms', 'lodash', 'hbs!../templates/titleSearch
         $('.rating-10').show('fast');
       }
         // console.log("This.Stars= ",this.stars);
-        $(this).show('fast');
-        console.log("MouseUp If else");
+        // $(this).show('fast');
+        console.log("MouseUp If else End");
     });
   });
 });
